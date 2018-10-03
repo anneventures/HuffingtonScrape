@@ -1,0 +1,30 @@
+{
+  "name": "huffingtonscrape",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anneventures/HuffingtonScrape.git"
+  },
+  "author": "Anne Simon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/anneventures/HuffingtonScrape/issues"
+  },
+  "homepage": "https://github.com/anneventures/HuffingtonScrape#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "logger": "0.0.1",
+    "mongoose": "^5.3.1",
+    "request": "^2.88.0"
+  }
+}
