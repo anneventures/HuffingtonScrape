@@ -6,15 +6,18 @@
     <style>
       body { background-color: #F2F6D0 }
       #wrapper {
-        width: 100%;
-        margin: 0% 5%;
-        padding: 5%;
+        width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 5%;
       }
       #articles {
         display: inline-block;
+        overflow: auto;
         width: 60%;
+        height: 700px;
       }
-      #notes {
+      #news {
         float: right;
         width: 30%;
       }
@@ -37,6 +40,7 @@
     <div id="wrapper">
       <h1>Huffington Scraper</h1>
       <h2><i>News articles from Huffington Post.</i></h2>
+        <p><a class="button" href="/scrape">Get new articles</a></p>
       <div id="articles"></div>
       <div id="news"></div>
     </div>
