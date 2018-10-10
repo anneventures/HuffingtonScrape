@@ -1,6 +1,6 @@
 # HuffingtonScrape
 
-Heroku app link: https://dry-anchorage-39312.herokuapp.com/ (not working)
+Heroku app link: https://sleepy-inlet-68175.herokuapp.com/ (haven't deployed yet. need to ask the TAs)
 
 <p>Web scraper app showing headlines from Huffington Post news site.</p>
 <p>Powered by:</p>
