@@ -11,7 +11,7 @@ $.getJSON("/articles", function(data) {
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
   // Empty the news from the news section
-  $("#news").empty();
+  $("#note").empty();
   // Save the id from the p tag
   var thisId = $(this).attr("data-id");
 
@@ -23,21 +23,15 @@ $(document).on("click", "p", function() {
     // With that done, add the news information to the page
     .then(function(data) {
       console.log(data);
-      // The title of the article
-      $("#news").append("<h2>" + data.title + "</h2>");
-      // An input to enter a new title
-      $("#news").append("<input id='titleinput' name='title' >");
-      // A textarea to add a new news body
-      $("#news").append("<textarea id='bodyinput' name='body'></textarea>");
-      // A button to submit a new news, with the id of the article saved to it
-      $("#news").append("<button data-id='" + data._id + "' id='savenews'>Save news article & comment</button>");
+      $("#note").append("<p><strong>" + data.title + "</strong></p>" + "<br/><h3>" + "Comment" + "</h3>");
+      $("#note").append("<input id='titleinput' name='title' >");
+      $("#note").append("<textarea id='bodyinput' name='body'></textarea>");
+      $("#note").append("<br/><button class='btn btn-primary' data-id='" + data._id + "' id='savenews'>Save news article & comment</button>");
 
       // If there's a news in the article
-      if (data.news) {
-        // Place the title of the news in the title input
-        $("#titleinput").val(data.news.title);
-        // Place the body of the news in the body textarea
-        $("#bodyinput").val(data.news.body);
+      if (data.note) {
+        $("#titleinput").val(data.note.title);
+        $("#bodyinput").val(data.note.body);
       }
     });
 });
@@ -47,7 +41,6 @@ $(document).on("click", "#savenews", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
 
-  // Run a POST request to change the news, using what's entered in the inputs
   $.ajax({
     method: "POST",
     url: "/articles/save/" + thisId
@@ -58,4 +51,15 @@ $(document).on("click", "#savenews", function() {
   // Also, remove the values entered in the input and textarea for news entry
   $("#titleinput").val("");
   $("#bodyinput").val("");
+});
+
+//Handle Delete Article button
+$(".delete").on("click", function() {
+  var thisId = $(this).attr("data-id");
+  $.ajax({
+      method: "POST",
+      url: "/articles/delete/" + thisId
+  }).done(function(data) {
+      window.location = "/saved"
+  })
 });

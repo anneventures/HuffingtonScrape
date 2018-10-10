@@ -21,12 +21,10 @@ var ArticleSchema = new Schema({
     type: Boolean,
     default: false
   },
-  // `news` is an object that stores a News id
-  // The ref property links the ObjectId to the News model
-  // This allows us to populate the Article with an associated News
-  news: {
+ 
+  note: {
     type: Schema.Types.ObjectId,
-    ref: "News"
+    ref: "Note"
   }
 });
 

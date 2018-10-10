@@ -17,7 +17,7 @@
         width: 60%;
         height: 700px;
       }
-      #news {
+      #note {
         float: right;
         width: 30%;
       }
@@ -46,8 +46,9 @@
 
         {{#if article}}
           {{#each article}}
-            <h3>{{this.title}}</h3>
-            <p>{{this.link}}</p>
+            <p>{{this.title}} (<a href="http://www.huffingtonpost.ca/{{this.link}}" target="_blank">View this article</a>)
+             <button type="button" class="btn btn-danger delete" data-id={{this._id}}>Delete</button></p>
+
           {{/each}}
         {{else}}
             <p>You haven't saved any articles.</p>

@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 });
 
 app.get("/saved", function(req, res) {
-  db.Article.find({"saved": true}).populate("news").exec(function(error, articles) {
+  db.Article.find({"saved": true}).populate("note").exec(function(error, articles) {
     var hbsObject = {
       article: articles
     };
@@ -90,12 +90,11 @@ app.get("/articles", function(req, res) {
     });
 });
 
-// Route for grabbing a specific Article by id, populate it with its news
+// Route for grabbing a specific Article by id
 app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   db.Article.findOne({ _id: req.params.id })
-    // ..and populate all of the news associated with it
-    .populate("news")
+    .populate("note")
     .then(function(dbArticle) {
       // If we were able to successfully find an Article with the given id, send it back to the client
       res.json(dbArticle);
@@ -106,7 +105,6 @@ app.get("/articles/:id", function(req, res) {
     });
 });
 
-// Route for saving/updating an Article's associated News
 app.post("/articles/save/:id", function(req, res) {
       // Use the article id to find and update its saved boolean
       db.Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
@@ -123,6 +121,22 @@ app.post("/articles/save/:id", function(req, res) {
       });
 });
 
+// Delete an article
+app.post("/articles/delete/:id", function(req, res) {
+  // Use the article id to find and update its saved boolean
+  db.Article.findOneAndUpdate({ "_id": req.params.id }, {"saved": false})
+  // Execute the above query
+  .exec(function(err, doc) {
+    // Log any errors
+    if (err) {
+      console.log(err);
+    }
+    else {
+      // Or send the document to the browser
+      res.send(doc);
+    }
+  });
+});
 
 app.listen(3000, () => {
   console.log('Scrapper app is running → PORT 3000');
