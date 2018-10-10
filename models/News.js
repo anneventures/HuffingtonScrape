@@ -7,9 +7,17 @@ var Schema = mongoose.Schema;
 // This is similar to a Sequelize model
 var NewsSchema = new Schema({
   // `title` is of type String
-  title: String,
+  title: {
+    String
+  },
   // `body` is of type String
-  body: String
+  body: { 
+    String
+  },
+  article: {
+    type: Schema.Types.ObjectId,
+    ref: "Article"
+  }
 });
 
 // This creates our model from the above schema, using mongoose's model method

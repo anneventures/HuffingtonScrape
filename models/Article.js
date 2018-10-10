@@ -16,6 +16,11 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
+
+  saved: {
+    type: Boolean,
+    default: false
+  },
   // `news` is an object that stores a News id
   // The ref property links the ObjectId to the News model
   // This allows us to populate the Article with an associated News

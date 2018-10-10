@@ -41,19 +41,18 @@
   </head>
   <body>
     <div id="wrapper">
-      <h1>Huffington Scraper</h1>
-      <h2><i>News articles from Huffington Post.</i></h2>
-      <br/>
-        <p><a class="btn btn-info" href="/scrape">Get new articles</a> <a class="btn btn-primary" href="/saved">View saved articles</a></p>
-      <br/>
-      <div id="articles">
-        <p class="alert alert-warning"><em>Click on an article below to comment and save</em>.</p>
-      </div>
-      
-      <div id="news">
-        <p>Your clicked news article will appear here for commenting and saving</p>
-      </div>
-      
+      <h1>Saved articles</h1>
+        <p><a class="btn btn-info" href="/">Go back home</a></p>
+
+        {{#if article}}
+          {{#each article}}
+            <h3>{{this.title}}</h3>
+            <p>{{this.link}}</p>
+          {{/each}}
+        {{else}}
+            <p>You haven't saved any articles.</p>
+        {{/if}}
+      {{!-- <div id="saved"></div> --}}
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="app.js"></script>

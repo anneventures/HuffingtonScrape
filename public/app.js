@@ -10,7 +10,7 @@ $.getJSON("/articles", function(data) {
 
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
-  // Empty the notes from the note section
+  // Empty the news from the news section
   $("#news").empty();
   // Save the id from the p tag
   var thisId = $(this).attr("data-id");
@@ -20,53 +20,42 @@ $(document).on("click", "p", function() {
     method: "GET",
     url: "/articles/" + thisId
   })
-    // With that done, add the note information to the page
+    // With that done, add the news information to the page
     .then(function(data) {
       console.log(data);
       // The title of the article
       $("#news").append("<h2>" + data.title + "</h2>");
       // An input to enter a new title
       $("#news").append("<input id='titleinput' name='title' >");
-      // A textarea to add a new note body
+      // A textarea to add a new news body
       $("#news").append("<textarea id='bodyinput' name='body'></textarea>");
-      // A button to submit a new note, with the id of the article saved to it
-      $("#news").append("<button data-id='" + data._id + "' id='savenews'>Save News</button>");
+      // A button to submit a new news, with the id of the article saved to it
+      $("#news").append("<button data-id='" + data._id + "' id='savenews'>Save news article & comment</button>");
 
       // If there's a news in the article
       if (data.news) {
-        // Place the title of the note in the title input
+        // Place the title of the news in the title input
         $("#titleinput").val(data.news.title);
-        // Place the body of the note in the body textarea
+        // Place the body of the news in the body textarea
         $("#bodyinput").val(data.news.body);
       }
     });
 });
 
-// When you click the savenote button
+// When you click the savenews button
 $(document).on("click", "#savenews", function() {
   // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
 
-  // Run a POST request to change the note, using what's entered in the inputs
+  // Run a POST request to change the news, using what's entered in the inputs
   $.ajax({
     method: "POST",
-    url: "/articles/" + thisId,
-    data: {
-      // Value taken from title input
-      title: $("#titleinput").val(),
-      // Value taken from note textarea
-      body: $("#bodyinput").val()
-    }
-  })
-    // With that done
-    .then(function(data) {
-      // Log the response
-      console.log(data);
-      // Empty the notes section
-      $("#news").empty();
-    });
+    url: "/articles/save/" + thisId
+    }).done(function(data) {
+      window.location = "/"
+    })
 
-  // Also, remove the values entered in the input and textarea for note entry
+  // Also, remove the values entered in the input and textarea for news entry
   $("#titleinput").val("");
   $("#bodyinput").val("");
 });
